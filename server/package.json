@@ -7,7 +7,7 @@
     "dev": "nodemon src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Mustafa Zahedi",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.15",
