@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "start": "yarn start --prefix server"
+  }
+}
