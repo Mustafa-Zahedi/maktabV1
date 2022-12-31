@@ -1,5 +1,5 @@
 import express from "express";
-import subjectRouter from "./subjects/subjects.router";
+import subjectRouter from "./subjects/subjects.routes";
 
 const api = express.Router();
 
