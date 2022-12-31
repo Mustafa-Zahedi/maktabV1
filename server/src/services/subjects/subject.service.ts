@@ -7,14 +7,11 @@ const subjectSchema = new mongoose.Schema({
 
 const subject = mongoose.model("subject", subjectSchema);
 
-const math = new subject({ name: "Math" });
-console.log("math", math);
-
-export async function saveSubject() {
-  const res = await math.save();
-  console.log("res", res);
-  const subjects = subject.find();
-  console.log("subjects", subjects);
+export async function saveSubject(name: string) {
+  const newSubject = new subject({ name });
+  return await newSubject.save();
 }
 
-// saveSubject();
+export async function getAllSubjects() {
+  return subject.find();
+}
