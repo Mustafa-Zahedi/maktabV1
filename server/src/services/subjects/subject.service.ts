@@ -7,6 +7,10 @@ const subjectSchema = new mongoose.Schema({
 
 const subject = mongoose.model("subject", subjectSchema);
 
+export async function updateSubject(name: string, newName: string) {
+  const newSubject = subject.replaceOne({ name }, { name: newName });
+  return await newSubject;
+}
 export async function saveSubject(name: string) {
   const newSubject = new subject({ name });
   return await newSubject.save();
