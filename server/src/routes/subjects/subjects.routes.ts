@@ -3,6 +3,7 @@ import { body } from "express-validator";
 import {
   httpDeleteSubject,
   httpGetAllSubjects,
+  httpGetSubjects,
   httpPostSubject,
   httPutSubject,
 } from "./subject.controller";
@@ -10,6 +11,8 @@ import {
 const subjectRouter = express.Router();
 
 subjectRouter.get("/", httpGetAllSubjects);
+
+subjectRouter.get("/find", body("name").notEmpty(), httpGetSubjects);
 
 subjectRouter.post(
   "/",

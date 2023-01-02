@@ -21,6 +21,10 @@ export async function saveSubject(name: string) {
   return await newSubject.save();
 }
 
+export async function getSubjects(name: string) {
+  return subject.find({ name }).limit(3).sort({ name: 1 });
+}
+
 export async function getAllSubjects() {
-  return subject.find();
+  return subject.find().sort({ name: 1 });
 }
