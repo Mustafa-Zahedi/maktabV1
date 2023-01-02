@@ -8,7 +8,7 @@ const subjectSchema = new mongoose.Schema({
 const subject = mongoose.model("subject", subjectSchema);
 
 export async function deleteSubject(sub: { name: string }) {
-  return subject.findOneAndDelete(sub);
+  return subject.deleteOne(sub);
 }
 
 export async function updateSubject(name: string, newName: string) {
