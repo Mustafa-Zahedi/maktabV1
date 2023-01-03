@@ -1,5 +1,6 @@
+import { log } from "console";
 import express from "express";
-import { body } from "express-validator";
+import { body, param, query } from "express-validator";
 import {
   httpDeleteSubject,
   httpGetAllSubjects,
@@ -10,7 +11,21 @@ import {
 
 const subjectRouter = express.Router();
 
-subjectRouter.get("/", httpGetAllSubjects);
+subjectRouter.get(
+  "/",
+  query("pageNumber").custom((value) => {
+    if (Number(value) < 1) {
+      throw new Error("pageNumber must be positive");
+    }
+    return true;
+  }),
+  query("pageSize").custom((value) => {
+    if (Number(value) < 1)
+      throw new Error("pageSize must be a positive interger");
+    return true;
+  }),
+  httpGetAllSubjects
+);
 
 subjectRouter.get("/find", httpGetSubject);
 

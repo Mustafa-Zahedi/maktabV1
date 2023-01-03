@@ -60,10 +60,7 @@ export async function getSubjects(
 
 // export const getSubject = async () => {};
 
-export async function getAllSubjects(
-  pageNumber: number | undefined = 1,
-  pageSize: number = Number.MAX_SAFE_INTEGER
-) {
+export async function getAllSubjects(pageNumber: number, pageSize: number) {
   return Subject.find()
     .skip((pageNumber - 1) * pageSize)
     .limit(pageSize)

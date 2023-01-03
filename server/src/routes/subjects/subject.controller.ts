@@ -10,12 +10,17 @@ import {
 
 // Read subject
 export async function httpGetAllSubjects(req: Request, res: Response) {
-  const pageNumber = req.query.pageNumber ? +req.query.pageNumber : undefined;
-  const pageSize = req.query.pageSize ? +req.query.pageSize : undefined;
-  console.log(pageNumber, pageSize);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const pageNumber = req.query.pageNumber ? +req.query.pageNumber : 1;
+  const pageSize = req.query.pageSize
+    ? +req.query.pageSize
+    : Number.MAX_SAFE_INTEGER;
 
   const Subjects = await getAllSubjects(pageNumber, pageSize);
-  return res.status(200).json({ Subjects, message: "welcome" });
+  return res.status(200).json({ Subjects });
 }
 
 export async function httpGetSubject(req: Request, res: Response) {
