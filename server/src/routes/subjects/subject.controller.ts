@@ -44,8 +44,8 @@ export async function httpPostSubject(req: Request, res: Response) {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { name, price } = req.body;
-  const result = await saveSubject({ name, price });
+  const { name, price, category } = req.body;
+  const result = await saveSubject({ name, price, category });
   return res.status(200).json({ message: "subject inserted", result });
 }
 

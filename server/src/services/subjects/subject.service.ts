@@ -1,8 +1,21 @@
 import mongoose from "mongoose";
 
-const subjectSchema = new mongoose.Schema({
-  name: String,
-  price: { type: Number, default: Math.random() * 10 },
+interface SubjectSchema {
+  name: string;
+  category: Enumerator;
+  isPublished: boolean;
+  price: number;
+  date: Date;
+}
+
+const subjectSchema = new mongoose.Schema<SubjectSchema>({
+  name: { type: String, minlength: 3, maxlength: 50 },
+  category: { type: String, required: true, enum: ["frontend", "backend"] },
+  isPublished: Boolean,
+  price: {
+    type: Number,
+    default: Math.random() * 10,
+  },
   date: { type: Date, default: Date.now() },
 });
 
@@ -27,11 +40,17 @@ export async function updateSubject(name: string, newName: string) {
 type subjParamType = {
   name: string;
   price: number;
+  category: string;
 };
-export async function saveSubject({ name, price }: subjParamType) {
-  const newSubject = new Subject({ name, price });
-  const result = await newSubject.save();
-  return result;
+export async function saveSubject({ name, price, category }: subjParamType) {
+  try {
+    const newSubject = new Subject({ name, price, category });
+    const result = await newSubject.save();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 }
 
 // Read subject
